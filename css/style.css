@@ -339,6 +339,48 @@ input[type="reset"]:hover {
     background: rgba(255, 255, 255, 0.2);
 }
 
+.popup_phone,
+.popup_email,
+.popup_follow {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    padding: 2rem;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    border-radius: 1rem;
+    background-color: rgba(38, 36, 51, 0.9);
+    backdrop-filter: blur(0.5rem);
+    -webkit-backdrop-filter: blur(0.5rem);
+    z-index: 2;
+}
+
+.popup_phone span,
+.popup_follow span {
+    font-size: 2rem;
+    text-align: center;
+    z-index: 3;
+}
+
+.popup_email span {
+    font-size: 1.3rem;
+    text-align: center;
+    z-index: 3;
+}
+
+.open_follow .popup_follow {
+    display: flex;
+}
+
+.open_phone .popup_phone {
+    display: flex;
+}
+
+.open_email .popup_email {
+    display: flex;
+}
+
 @media (max-width: 1799px) {
     .right_section {
         padding: 2rem 2.5rem 4rem;
@@ -531,7 +573,7 @@ input[type="reset"]:hover {
     .follow_btn {
         margin-left: 1rem;
     }
-    
+
     .open {
         display: flex;
     }

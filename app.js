@@ -17,8 +17,10 @@ const getinitialFriends = async () => {
         initialFriends = data.results;
         copyFriends = [...initialFriends]
         createCards(initialFriends);
+        processCardBtns()
     } catch (e) {
         console.log(e);
+        alert(`Oops, something's wrong. Please try again!`)
     };
 };
 
@@ -26,20 +28,24 @@ const createCards = (initialFriends) => {
     const htmlinitialFriendsData = initialFriends.map(friend => {
         return `
             <div class="card glass_bg">
-                <img class="photo" src="${friend.picture.large}" alt="person photo" />
+                <img class="photo" src="${friend.picture.large}" alt="person photo">
                 <h2 class="name text">${friend.name.first}</h2>
                 <h2 class="name text">${friend.name.last}</h2>
                 <span class="additional_info text">${friend.dob.age} y. o., ${friend.gender}</span>
                 <span class="additional_info text">
                     <i class="fa-solid fa-location-dot"></i> ${friend.location.country}
                 </span>
-                <a class="email glass_btn" href="${friend.email}">
+                <a class="email glass_btn" href="mailto:${friend.email}">
                     <i class="fa-solid fa-envelope"></i>
                 </a>
-                <a class="phone glass_btn" href="${friend.cell}">
+                <a class="phone glass_btn" href="tel:${friend.cell}">
                     <i class="fa-solid fa-phone"></i>
                 </a>
                 <div class="follow_btn glass_btn">Follow</div>
+
+                <div class="popup_phone"><span class="text">Phone number:<br>${friend.cell}</span></div>
+                <div class="popup_email"><span class="text">Email:<br>${friend.email}</span></div>
+                <div class="popup_follow"><span class="text">You are now following ${friend.name.first}!</span></div>
             </div>
         `;
     }).join('');
@@ -113,9 +119,6 @@ const resetAll = () => {
 };
 
 const openFilters = ({target}) => {
-    if (target.classList.contains('app_name')
-        || target.classList.contains('filter_header')) return;
-
     if (target.classList.contains('fa-filter')
         || target.classList.contains('filter_btn')) {
         sideBar.classList.toggle('open');
@@ -132,9 +135,32 @@ const openFilters = ({target}) => {
     };
 };
 
-sideBar.addEventListener('input', changeFriends);
-searchInput.addEventListener('input', changeFriends);
-resetBtn.addEventListener('click', resetAll);
-filtersHeader.addEventListener('click', openFilters);
+window.addEventListener('DOMContentLoaded', () => {
+    sideBar.addEventListener('input', changeFriends);
+    searchInput.addEventListener('input', changeFriends);
+    resetBtn.addEventListener('click', resetAll);
+    filtersHeader.addEventListener('click', openFilters);
+  });
 
 getinitialFriends();
+
+const processCardBtns = () => {
+    cardsContainer.addEventListener('click', ({target}) =>{
+        if (target.classList.contains('follow_btn')) {
+            target.closest('.card').classList.add('open_follow');
+            setTimeout(() => target.closest('.card').classList.remove('open_follow'), 1500)
+        };
+
+        if (target.classList.contains('phone')
+            || target.classList.contains('fa-phone')) {
+            target.closest('.card').classList.add('open_phone');
+            setTimeout(() => target.closest('.card').classList.remove('open_phone'), 1500);
+        };
+
+        if (target.classList.contains('email')
+            || target.classList.contains('fa-envelope')) {
+            target.closest('.card').classList.add('open_email');
+            setTimeout(() => target.closest('.card').classList.remove('open_email'), 1500);
+        };
+    });
+};
