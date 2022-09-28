@@ -1,6 +1,6 @@
 'use strict';
 
-const cardsContainer = document.querySelector('.cards');
+const cardsContainer = document.querySelector('.cards_container');
 const searchInput = document.querySelector('input[type=search]');
 const sideBar = document.querySelector('.filters');
 const resetBtn = document.querySelector('input[type=reset]');
@@ -107,6 +107,7 @@ const searchFriends = (value) => {
 };
 
 const resetAll = () => {
+    searchInput.value = '';
     copyFriends = [...initialFriends]
     createCards(copyFriends);
 };

@@ -98,7 +98,7 @@ body {
 
 input[type="radio"] {
     position: absolute;
-	left: -300%;
+	left: -1000%;
 }
 
 input[type="radio"]:checked + span {
@@ -258,11 +258,12 @@ input[type="search"]::-webkit-search-cancel-button{
     transition: all 0.3s ease;
 }
 
-.cards {
+.cards_container {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, 33.333%);
     grid-template-rows: repeat(1, 1fr);
     gap: 1rem;
+    margin-right: 2rem;
 }
 
 .card {
@@ -339,6 +340,10 @@ input[type="reset"]:hover {
 }
 
 @media (max-width: 1799px) {
+    .right_section {
+        padding: 2rem 2.5rem 4rem;
+    }
+
     .card {
         grid-template-columns: repeat(5, 20%);
     }
@@ -350,7 +355,35 @@ input[type="reset"]:hover {
     }
 }
 
-@media (max-width: 767px) {
+@media (max-width: 1439px) {
+    .right_section {
+        padding: 2rem 3rem 4rem;
+    }
+
+    .cards_container {
+        margin-right: 1rem;
+        grid-template-columns: repeat(2, 50%);
+    }
+
+    .greeting h2 {
+        width: 6rem;
+        font-size: 1.4rem;
+        font-weight: 700;
+    }
+
+    .search_block {
+        flex: 0 0 70%;
+        padding: 1rem 1.2rem;
+        border-radius: 3rem;
+    }
+    
+    .search {
+        width: 70%;
+        position: relative;
+    }
+}
+
+@media (max-width: 1023px) {
     body {
         overflow-x: hidden;
     }
@@ -441,8 +474,14 @@ input[type="reset"]:hover {
 
     .top_block {
         height: auto;
-        flex-direction: column-reverse;
+        flex-direction: column;
         justify-content: center;
+    }
+
+    .greeting h2 {
+        width: auto;
+        font-size: 2.2rem;
+        font-weight: 700;
     }
 
     .open_search.filter_header{
@@ -458,7 +497,7 @@ input[type="reset"]:hover {
         position: fixed;
         top: 7rem;
         height: 3rem;
-        width: 87%;
+        width: 93%;
         padding: 0;
         z-index: 2;
     }
@@ -471,12 +510,10 @@ input[type="reset"]:hover {
         display: none;
     }
 
-    .cards {
-        width: 100%;
-        display: flex;
-        flex-direction: column;
+    .cards_container {
+        grid-template-columns: repeat(2, 50%);
     }
-    
+
     .card {
         display: grid;
         grid-template-columns: repeat(6, 20%);
@@ -497,5 +534,19 @@ input[type="reset"]:hover {
     
     .open {
         display: flex;
+    }
+}
+
+@media (max-width: 767px) {
+
+    .open_search.search_block {
+        width: 87%;
+    }
+
+    .cards_container {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        margin-right: 0rem;
     }
 }
