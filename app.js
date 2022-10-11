@@ -72,16 +72,22 @@ const filter = (value, friendsData) => {
 const sort = (value, friendsData) => {
     switch (sideBar.sort.value) {
         case 'name_increase':
-            return friendsData.sort((a, b) => a.name.first < b.name.first ? -1 : 1);
+            friendsData.sort((a, b) => a.name.first < b.name.first ? -1 : 1);
+            break;
         case 'name_decrease':
-            return friendsData.sort((a, b) => a.name.first > b.name.first ? -1 : 1);
+            friendsData.sort((a, b) => a.name.first > b.name.first ? -1 : 1);
+            break;
         case 'age_increase':
-            return friendsData.sort((a, b) => a.dob.age < b.dob.age ? -1 : 1);
+            friendsData.sort((a, b) => a.dob.age < b.dob.age ? -1 : 1);
+            break;
         case 'age_decrease':
-            return friendsData.sort((a, b) => a.dob.age > b.dob.age ? -1 : 1);
+            friendsData.sort((a, b) => a.dob.age > b.dob.age ? -1 : 1);
+            break;
         default:
-            return friendsData;
+            friendsData;
     };
+
+    return friendsData;
 };
 
 const searchFriends = (value) => {
